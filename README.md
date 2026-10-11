@@ -165,23 +165,6 @@ pnpm install
 pnpm -r build
 ```
 
-### Environment Configuration
-Copy `.env.example` to `.env`:
-```bash
-cp .env.example .env
-```
-Default `.env` settings:
-```ini
-GROQ_API_KEY=                           # Optional: Leave empty for Deterministic Demo Mode
-GROQ_MODEL=llama-3.3-70b-versatile     # Configurable Groq model
-EXECUTION_MODE=demo                     # "demo" or "llm"
-PORT=4000                              # SentinelOps API port
-SIMULATOR_PORT=5001                    # Local Service Simulator port
-WEB_PORT=3000                          # Frontend dashboard port
-SIMULATOR_URL=http://localhost:5001
-API_URL=http://localhost:4000
-DATABASE_PATH=./data/sentinelops.db
-```
 
 ### Starting the Applications
 You can start all three services concurrently using root scripts:
