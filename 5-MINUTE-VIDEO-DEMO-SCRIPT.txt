@@ -1,0 +1,236 @@
+================================================================================
+SENTINELOPS AI — COMPLETE 5-MINUTE VIDEO DEMO SCRIPT
+Autonomous Incident Investigation & Resolution Engineer
+================================================================================
+
+Total Target Duration: ~5 Minutes (300 Seconds)
+Format:
+  [TIMESTAMP]
+  ACTION: What exact button or element to click on screen
+  SCREEN: What page/tab to display
+  SPOKEN SCRIPT: Word-for-word voiceover script (read with confidence and energy)
+
+--------------------------------------------------------------------------------
+[0:00 - 0:45] PART 1: THE HOOK & EXECUTIVE DASHBOARD OVERVIEW
+--------------------------------------------------------------------------------
+
+SCREEN:
+  Open browser to: http://localhost:3000
+  Active View: "Dashboard" tab in the left sidebar
+
+ACTION:
+  Move cursor smoothly across the 4 metric cards (Service Health, Incidents Resolved,
+  Autonomous MTTR: 3.4s, Security Engine), then gesture over the Monitored Topology cards.
+
+SPOKEN SCRIPT:
+  "Hi everyone. Today I'm excited to present SentinelOps AI — an autonomous incident
+  investigation and resolution engineer designed for modern software teams and SREs.
+
+  Every engineering team dreads the 3:00 AM production alert. Critical consumer workers
+  fail, queues back up, and engineers have to wake up, sift through thousands of lines
+  of logs, hunt down outdated Notion runbooks, and manually run dangerous restart scripts —
+  all under immense pressure.
+
+  SentinelOps AI changes this completely. It is not a passive monitoring tool, and it is
+  not a toy chatbot. It is an autonomous operator that runs an explicit, closed-loop
+  state machine:
+
+  It investigates the root cause, retrieves relevant markdown runbooks, proposes
+  structured remediation plans, requests human cryptographic approval for high-risk
+  actions, executes repairs, and independently verifies that customer order flow has
+  actually recovered using read-only API probes before writing an audit postmortem.
+
+  Right here on the Command Center, we see our live service health, our sub-5-second MTTR,
+  and our active token-gated policy engine."
+
+--------------------------------------------------------------------------------
+[0:45 - 1:45] PART 2: AUTONOMOUS INCIDENT RESOLUTION (SCENARIO A)
+--------------------------------------------------------------------------------
+
+SCREEN:
+  Sidebar -> Click "Workflows" tab
+
+ACTION:
+  1. Click "Workflows" in the left sidebar.
+  2. In the AI Operator Interface at the top, click the chip:
+     "Scenario A: Worker Disabled".
+  3. Point out the Execution Engine toggle ("Deterministic Demo" vs "Groq LLM").
+  4. Click the blue "Dispatch" button inside the prompt box.
+
+SPOKEN SCRIPT:
+  "Let's see SentinelOps in action. I'm navigating to our live Workflows command view.
+
+  I'll select 'Scenario A: Worker Disabled'. Our order consumer worker has crashed,
+  leaving over 140 customer orders stranded in the queue.
+
+  Notice the Execution Engine toggle: SentinelOps supports ultra-fast live LLM inference
+  via the Groq SDK with llama-3.3-70b, as well as a 100% deterministic offline demo mode
+  for air-gapped environments and CI/CD testing.
+
+  Let's click 'Dispatch' and watch the autonomous lifecycle run in real time.
+
+  Watch the timeline track and activity monitor stream:
+  First, state 'UNDERSTANDING': the agent parses our natural language goal into a
+  structured objective for the order-processing service.
+
+  Next, 'INVESTIGATING': it queries service health and reads the queue metrics, discovering
+  142 stranded orders. It searches the error logs and identifies an unhandled broker
+  heartbeat timeout with exit code 143.
+
+  Then, 'PLANNING': it retrieves standard operating procedure RB-ORD-001 from our runbook
+  repository and formulates a safe 10-step execution plan.
+
+  During 'EXECUTING', it launches Playwright browser automation in headless Chromium to
+  take a visual snapshot of the incident console. It invokes the permitted remediation tool
+  'enable_simulated_worker' to spawn a new process, and verifies active queue consumption.
+
+  Finally, 'VERIFYING': it runs five independent read-only probes until backlog drops,
+  and transitions cleanly to COMPLETED."
+
+--------------------------------------------------------------------------------
+[1:45 - 2:30] PART 3: POSTMORTEM REPORT & PLAYWRIGHT VISUAL EVIDENCE
+--------------------------------------------------------------------------------
+
+SCREEN:
+  Top Header -> Click "View Incident Report" button
+
+ACTION:
+  1. Click the green "View Incident Report" button in the top header.
+  2. Scroll slowly through the modal: Executive Summary, Root Cause, Before & After Metrics.
+  3. Click the "X" button at the top right of the modal to close it.
+  4. On the Gantt Timeline track, click Step 6: "capture_console_evidence".
+  5. Scroll down to show the "Execution Details" panel.
+
+SPOKEN SCRIPT:
+  "Once the incident is resolved, SentinelOps automatically synthesizes a grounded postmortem.
+  Let's click 'View Incident Report'.
+
+  Here we see the generated postmortem report:
+  - An Executive Summary for engineering leadership.
+  - A technical Root Cause Analysis citing the exact worker PID and exit code 143.
+  - And most importantly, an independent Before and After metrics verification table.
+  Notice the proof: Before remediation, the worker was STOPPED with 142 orders backed up
+  and DEGRADED health. After remediation, the worker is RUNNING, the queue is drained,
+  and health is HEALTHY.
+  - It also cites the exact runbooks consulted, including RB-ORD-001.
+
+  Let's close the report and look at Step 6 on our timeline.
+  When I click 'capture_console_evidence', look at the Execution Details panel below.
+  SentinelOps doesn't just trust text logs — it drove a headless browser to inspect the
+  actual operations console at port 5001, confirming visual queue meters and DOM state."
+
+--------------------------------------------------------------------------------
+[2:30 - 3:30] PART 4: SECURITY ENGINE & HUMAN APPROVAL GATE (SCENARIO E)
+--------------------------------------------------------------------------------
+
+SCREEN:
+  AI Operator Interface -> Click "Scenario E: Restricted Action Gate"
+
+ACTION:
+  1. Scroll up to the Operator Panel.
+  2. Click the preset chip: "Scenario E: Restricted Action Gate".
+  3. Notice the prompt: 'Order processing worker is in a memory leak loop. Execute a full worker pool restart...'
+  4. Click the blue "Dispatch" button.
+  5. Wait 3 seconds — the screen will halt at "AWAITING_APPROVAL" and the Human Approval Gate modal will automatically pop up with a gold/red shield.
+  6. Point out the tool name "restart_simulated_worker", the Risk Level "RESTRICTED_REMEDIATION", and the single-use token.
+  7. Click the green "Approve Action" button inside the modal.
+  8. Watch execution resume, execute the restart, verify, and complete.
+
+SPOKEN SCRIPT:
+  "Now, let's address the biggest concern with autonomous AI agents: Security and Safety.
+  How do we ensure an agent never accidentally wipes a production database or executes
+  a catastrophic operation without permission?
+
+  SentinelOps AI solves this with a server-enforced policy engine and cryptographic
+  single-use approval tokens.
+
+  Let's select 'Scenario E: Restricted Action Gate'. In this scenario, the worker pool
+  is suffering from a memory leak, requiring a full restart of all worker processes.
+
+  Let's click 'Dispatch'.
+
+  Watch closely: the agent diagnoses the leak, but the moment it reaches the restricted tool
+  'restart_simulated_worker', execution immediately halts!
+
+  Look at this modal: state machine enters 'AWAITING_APPROVAL'.
+  The server generated a cryptographic single-use token bound to this specific task,
+  step number, and tool arguments, with a 300-second TTL.
+  The frontend cannot bypass this. An LLM prompt injection cannot bypass this.
+  Execution is physically paused on the backend.
+
+  As the human-in-the-loop SRE operator, I inspect the proposed arguments and click 'Approve Action'.
+
+  Instantly, the token is consumed, marked as USED in the database, the safe restart executes,
+  independent verification passes, and the task finishes successfully!"
+
+--------------------------------------------------------------------------------
+[3:30 - 4:15] PART 5: EXPLORING THE ENTERPRISE SYSTEM CAPABILITIES
+--------------------------------------------------------------------------------
+
+SCREEN:
+  Left Sidebar navigation tabs
+
+ACTION:
+  1. Click "Agents" in the left sidebar.
+     - Show the 12-state state machine cards and the 13-tool security matrix.
+  2. Click "Integrations" in the left sidebar.
+     - Click "Test Connection" on the "Local Service Simulator" card.
+  3. Click "Schedules" in the left sidebar.
+     - Click "Run Probe Now" on the first card.
+  4. Click "Audit Logs" in the left sidebar.
+     - Scroll to show the tamper-evident cryptographic event log.
+  5. Click "Task Runs" in the left sidebar.
+     - Show the history of all runs, type "Scenario" in search, and click "Inspect" on any run.
+
+SPOKEN SCRIPT:
+  "Let's explore the broader enterprise capabilities in the sidebar:
+
+  Under 'Agents', we have our explicit 12-state state machine flow, alongside our
+  Tool Security Matrix. Every registered tool is strictly categorized:
+  READ_ONLY for diagnostics, LOW_RISK for standard operations, RESTRICTED for consequential
+  writes requiring human approval, and FORBIDDEN for destructive commands.
+
+  Under 'Integrations', we have live telemetry across our entire stack.
+  I can click 'Test Connection' to verify our stateful simulator, our Express control plane,
+  and our Groq LLM integration with sub-millisecond roundtrips.
+
+  Under 'Schedules', our automated background watchdogs continuously monitor worker
+  heartbeats and backlog thresholds, running active health probes.
+
+  Under 'Audit Logs', every single state transition, tool call, policy verdict, and approval
+  token is persisted to an immutable, append-only SQLite WAL database for SOC2 compliance.
+
+  And under 'Task Runs', engineers can search and inspect every historical incident run
+  with full timeline replays."
+
+--------------------------------------------------------------------------------
+[4:15 - 5:00] PART 6: TECH STACK, TEST COVERAGE & CONCLUSION
+--------------------------------------------------------------------------------
+
+SCREEN:
+  Click "Dashboard" in the sidebar to return to the executive command center.
+
+ACTION:
+  1. Click "Dashboard" in the sidebar.
+  2. Point out the updated "Incidents Resolved" counter and overall green health badges.
+  3. Bring up a brief view or mention of the test suite and repository.
+
+SPOKEN SCRIPT:
+  "Under the hood, SentinelOps AI is built with modern, enterprise-grade technologies:
+  - Next.js 16 and Tailwind CSS for a reactive, sub-second workflow dashboard.
+  - Node.js v24 with native SQLite WAL mode for high-performance zero-dependency persistence.
+  - Official Groq SDK running llama-3.3-70b-versatile for sub-400ms token generation.
+  - Playwright for real headless browser visual inspection.
+  - And a battle-tested test suite with 25 out of 25 passing unit and integration tests
+    covering state transitions, injection defenses, and policy bounds.
+
+  SentinelOps AI bridges the gap between AI autonomy and enterprise safety. It gives software
+  teams an always-on, trustworthy SRE partner that investigates instantly, remediates safely,
+  and verifies every single outcome.
+
+  Thank you for watching! Check out the repository, run 'pnpm dev' to launch the stack locally,
+  and test all seven incident scenarios yourself."
+
+================================================================================
+END OF SCRIPT
+================================================================================

@@ -1,0 +1,28 @@
+{
+  "approvalRules": [
+    {
+      "action": "restart_simulated_worker",
+      "risk": "RESTRICTED_REMEDIATION",
+      "requiredApproverRole": "SRE_ONCALL",
+      "tokenTtlSeconds": 300,
+      "singleUse": true,
+      "reasonTemplate": "Worker restart can interrupt in-flight queue batches. Requires operator confirmation."
+    },
+    {
+      "action": "disable_simulated_worker",
+      "risk": "RESTRICTED_REMEDIATION",
+      "requiredApproverRole": "SRE_LEAD",
+      "tokenTtlSeconds": 300,
+      "singleUse": true,
+      "reasonTemplate": "Disabling an active worker halts customer order processing."
+    },
+    {
+      "action": "rollback_deployment",
+      "risk": "RESTRICTED_REMEDIATION",
+      "requiredApproverRole": "RELEASE_MANAGER",
+      "tokenTtlSeconds": 600,
+      "singleUse": true,
+      "reasonTemplate": "Deployment rollback alters production container image tags."
+    }
+  ]
+}

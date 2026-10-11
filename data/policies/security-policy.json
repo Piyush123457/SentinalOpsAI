@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "policyName": "Enterprise SRE Agent Safety Policy",
+  "rules": [
+    {
+      "category": "DIAGNOSTIC",
+      "tools": [
+        "get_service_health",
+        "get_queue_metrics",
+        "search_service_logs",
+        "get_recent_deployments",
+        "read_runbook",
+        "inspect_worker_state",
+        "run_health_check",
+        "inspect_processing_counters",
+        "read_incident_state",
+        "capture_console_evidence"
+      ],
+      "riskLevel": "READ_ONLY",
+      "autoApprove": true
+    },
+    {
+      "category": "SAFE_REMEDIATION",
+      "tools": [
+        "enable_simulated_worker"
+      ],
+      "riskLevel": "LOW_RISK_REMEDIATION",
+      "autoApprove": true,
+      "maxExecutionsPerTask": 2
+    },
+    {
+      "category": "RESTRICTED_REMEDIATION",
+      "tools": [
+        "disable_simulated_worker",
+        "restart_simulated_worker",
+        "scale_worker_pool",
+        "rollback_deployment"
+      ],
+      "riskLevel": "RESTRICTED_REMEDIATION",
+      "autoApprove": false,
+      "requiresHumanToken": true
+    },
+    {
+      "category": "FORBIDDEN",
+      "tools": [
+        "purge_queue",
+        "drop_database_tables",
+        "execute_arbitrary_shell",
+        "bypass_policy_engine"
+      ],
+      "riskLevel": "FORBIDDEN",
+      "autoApprove": false
+    }
+  ],
+  "sandbox": {
+    "networkRestrictions": "Loopback simulator endpoints only",
+    "shellExecution": "Strictly Prohibited",
+    "untrustedLogEscaping": true
+  }
+}

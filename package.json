@@ -1,0 +1,25 @@
+{
+  "name": "sentinelops-ai-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SentinelOps AI - Autonomous Incident Investigation and Resolution Engineer",
+  "scripts": {
+    "dev": "concurrently -n \"SIMULATOR,API,WEB\" -c \"magenta,blue,cyan\" \"pnpm --filter @sentinelops/simulator dev\" \"pnpm --filter @sentinelops/api dev\" \"pnpm --filter @sentinelops/web dev\"",
+    "dev:backend": "concurrently -n \"SIMULATOR,API\" -c \"magenta,blue\" \"pnpm --filter @sentinelops/simulator dev\" \"pnpm --filter @sentinelops/api dev\"",
+    "build": "pnpm -r run build",
+    "test": "vitest run",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test tests/e2e",
+    "clean": "pnpm -r --parallel exec rimraf dist .turbo",
+    "typecheck": "tsc -b --dry"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^22.13.4",
+    "concurrently": "^9.1.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}

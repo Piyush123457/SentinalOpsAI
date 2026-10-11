@@ -1,0 +1,28 @@
+{
+  "name": "@sentinelops/agent-core",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@sentinelops/llm-groq": "workspace:*",
+    "@sentinelops/memory": "workspace:*",
+    "@sentinelops/policy": "workspace:*",
+    "@sentinelops/shared": "workspace:*",
+    "@sentinelops/tools": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}

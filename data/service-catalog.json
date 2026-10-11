@@ -1,0 +1,47 @@
+{
+  "services": [
+    {
+      "id": "order-processing-service",
+      "name": "Order Processing Service",
+      "description": "Consumes incoming customer orders, performs inventory validation, and prepares fulfillment batches.",
+      "tier": "Tier-1",
+      "owner": "team-checkout",
+      "dependencies": [
+        "payment-gateway-service",
+        "inventory-service",
+        "postgres-primary",
+        "redis-order-queue"
+      ],
+      "healthEndpoint": "/health",
+      "worker": {
+        "name": "order-consumer-worker-1",
+        "type": "background-consumer",
+        "concurrency": 4,
+        "maxBatchSize": 50
+      },
+      "slos": {
+        "availability": "99.95%",
+        "queueLatencyMs": 500,
+        "maxPendingQueueDepth": 100
+      }
+    },
+    {
+      "id": "payment-gateway-service",
+      "name": "Payment Gateway Service",
+      "description": "Integrates with payment processors (Stripe/Adyen) for order settlement.",
+      "tier": "Tier-1",
+      "owner": "team-payments",
+      "dependencies": ["postgres-primary"],
+      "healthEndpoint": "/health/payments"
+    },
+    {
+      "id": "inventory-service",
+      "name": "Inventory & Stock Service",
+      "description": "Maintains SKU stock reservations and warehouse location records.",
+      "tier": "Tier-2",
+      "owner": "team-logistics",
+      "dependencies": ["postgres-primary"],
+      "healthEndpoint": "/health/inventory"
+    }
+  ]
+}

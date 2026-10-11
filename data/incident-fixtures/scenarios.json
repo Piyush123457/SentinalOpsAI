@@ -1,0 +1,87 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario-a",
+      "name": "Scenario A: Worker Disabled (Standard Remediation)",
+      "prompt": "The order processing service is failing. Investigate the issue, inspect the relevant logs and runbook, fix it if safe, verify that orders are processing again, and prepare an incident report.",
+      "description": "Background consumer worker was unexpectedly halted. Queue is backing up. Standard remediation (enable worker) resolves the issue, followed by verified queue processing.",
+      "initialState": {
+        "service": "order-processing-service",
+        "workerRunning": false,
+        "queueDepth": 142,
+        "processedCount": 1050,
+        "errorRate": 4.8,
+        "serviceHealth": "DEGRADED"
+      }
+    },
+    {
+      "id": "scenario-b",
+      "name": "Scenario B: First Remediation Attempt Fails",
+      "prompt": "Investigate degraded order processing throughput. Attempt standard restart and adapt if the worker rejects the initial signal.",
+      "description": "Initial enable command encounters simulated intermittent lock. Agent observes state remained stopped, detects lock file in logs, performs cleanup and successful retry.",
+      "initialState": {
+        "service": "order-processing-service",
+        "workerRunning": false,
+        "queueDepth": 210,
+        "processedCount": 980,
+        "simulateFlakyFirstAttempt": true
+      }
+    },
+    {
+      "id": "scenario-c",
+      "name": "Scenario C: Tool Timeout & State Re-check",
+      "prompt": "Investigate order worker health check latency and queue backlog under high load.",
+      "description": "A diagnostic probe simulates a network timeout. The agent does not blindly assume failure, but inspects current simulator state before considering retry.",
+      "initialState": {
+        "service": "order-processing-service",
+        "simulateTimeout": true,
+        "queueDepth": 175
+      }
+    },
+    {
+      "id": "scenario-d",
+      "name": "Scenario D: Conflicting Evidence Reconciliation",
+      "prompt": "Customer reported orders not completing, but superficial health check returns HTTP 200. Reconcile evidence and diagnose the root cause.",
+      "description": "HTTP /health returns 200 (shallow check), but queue depth is growing and worker logs report downstream database connection saturation. Agent gathers deeper evidence.",
+      "initialState": {
+        "service": "order-processing-service",
+        "shallowHealth": 200,
+        "deepHealth": "UNHEALTHY",
+        "queueDepth": 185
+      }
+    },
+    {
+      "id": "scenario-e",
+      "name": "Scenario E: Restricted Action Approval Gate",
+      "prompt": "Order processing worker is in a memory leak loop. Execute a full worker pool restart and configuration reload.",
+      "description": "Full worker restart is classified as RESTRICTED_REMEDIATION. Agent halts execution at AWAITING_APPROVAL until human operator confirms.",
+      "initialState": {
+        "service": "order-processing-service",
+        "workerRunning": true,
+        "requiresRestart": true,
+        "queueDepth": 320
+      }
+    },
+    {
+      "id": "scenario-f",
+      "name": "Scenario F: Runtime Restart & Checkpoint Resumption",
+      "prompt": "Resume recovery of order processing pipeline from saved checkpoint after orchestrator restart.",
+      "description": "Orchestrator restores persisted task state, checks actual system state before resuming non-idempotent actions.",
+      "initialState": {
+        "service": "order-processing-service",
+        "checkpointAvailable": true
+      }
+    },
+    {
+      "id": "scenario-g",
+      "name": "Scenario G: Verification Failure Detection",
+      "prompt": "Verify resolution of order processing issue where downstream database is still read-only.",
+      "description": "Remediation succeeds superficially, but independent verification finds processing counters are not increasing. Agent flags VERIFICATION_FAILED instead of falsely completing.",
+      "initialState": {
+        "service": "order-processing-service",
+        "workerRunning": true,
+        "simulateStalledQueue": true
+      }
+    }
+  ]
+}
